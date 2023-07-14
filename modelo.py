@@ -4,23 +4,49 @@
 
 class Filme:
     def __init__(self, nome, ano, duracao):
-        self.nome = nome.title()
+        self.__nome = nome.title() #protegendo (tornando privado)
         self.ano = ano
-        self.duracao = duracao
-        self.likes = 0 #inicializa contagem de like
+        self.duracao = duracao #não protegido
+        self.__likes = 0 #Proteger criar problemas para acessar
 
+    @property #usado para criar uma propriedade que retorna um valor privado
+    def likes(self):
+        return self.__likes
     def dar_like(self): #método para dar likes é um método. Pq ele é incremental
-        self.likes += 1
+        self.__likes += 1
+
+    @property
+    def nome(self):
+        return self.__nome
+
+    @nome.setter #define que um private receba novo valor
+    def nome(self, novo_nome):
+        self.__nome = novo_nome.title()#padroniza tratamento
 
 class Serie:
     def __init__(self, nome, ano, temporadas):
-        self.nome = nome.title()
+        self.__nome = nome.title()
         self.ano = ano
         self.temporadas = temporadas
-        self.likes = 0 #inicializa likes
+        self.__likes = 0 #inicializa likes
+
+    @property
+    def likes(self):
+        return self.__likes
 
     def dar_like(self): #método para dar likes é um método. Pq ele é incremental
         self.likes += 1
+
+    def dar_like(self):  # método para dar likes é um método. Pq ele é incremental
+        self.__likes += 1
+
+    @property
+    def nome(self):
+        return self.__nome
+
+    @nome.setter
+    def nome(self, novo_nome):
+        self.__nome = novo_nome.title()
 
 vingadores = Filme('vingadores - guerra infinita', 2018, 160)
 vingadores.dar_like()
