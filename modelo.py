@@ -4,20 +4,30 @@
 
 class Filme:
     def __init__(self, nome, ano, duracao):
-        self.nome = nome
+        self.nome = nome.title()
         self.ano = ano
         self.duracao = duracao
+        self.likes = 0 #inicializa contagem de like
+
+    def dar_like(self): #método para dar likes é um método. Pq ele é incremental
+        self.likes += 1
 
 class Serie:
     def __init__(self, nome, ano, temporadas):
-        self.nome = nome
+        self.nome = nome.title()
         self.ano = ano
         self.temporadas = temporadas
+        self.likes = 0 #inicializa likes
+
+    def dar_like(self): #método para dar likes é um método. Pq ele é incremental
+        self.likes += 1
 
 vingadores = Filme('vingadores - guerra infinita', 2018, 160)
-print(f'Nome: {vingadores.nome} - Ano: {vingadores.nome} - Duraçao: {vingadores.duracao}')
-
+vingadores.dar_like()
 
 atlanta = Serie('atlanta', 2018, 2)
-print(f'Nome: {atlanta.nome} - Ano: {atlanta.ano} - Temporadas: {atlanta.temporadas}')
+atlanta.dar_like()
+atlanta.dar_like()
 
+print(f'Nome: {atlanta.nome} - Ano: {atlanta.ano} - Temporadas: {atlanta.temporadas} - Likes: {atlanta.likes}')
+print(f'Nome: {vingadores.nome} - Ano: {vingadores.ano} - Duraçao: {vingadores.duracao} - Likes: {vingadores.likes}')
