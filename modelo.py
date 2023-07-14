@@ -1,52 +1,37 @@
 #Herança, Polimorfismo e mais
 #tarefa _ playlist de programas de TV
 #modelo é o nome do doc criado para representar conceitos classes que representam um domínio do sistema
-
-class Filme:
-    def __init__(self, nome, ano, duracao):
-        self.__nome = nome.title() #protegendo (tornando privado)
+class Programa:
+    def __init__(self, nome, ano):
+        self._nome = nome.title()  # classes mãe devem receber apenas '1 _' p/ tornando privado
         self.ano = ano
-        self.duracao = duracao #não protegido
-        self.__likes = 0 #Proteger criar problemas para acessar
+        self._likes = 0
 
-    @property #usado para criar uma propriedade que retorna um valor privado
+    @property  # usado para criar uma propriedade que retorna um valor privado
     def likes(self):
-        return self.__likes
-    def dar_like(self): #método para dar likes é um método. Pq ele é incremental
-        self.__likes += 1
-
-    @property
-    def nome(self):
-        return self.__nome
-
-    @nome.setter #define que um private receba novo valor
-    def nome(self, novo_nome):
-        self.__nome = novo_nome.title()#padroniza tratamento
-
-class Serie:
-    def __init__(self, nome, ano, temporadas):
-        self.__nome = nome.title()
-        self.ano = ano
-        self.temporadas = temporadas
-        self.__likes = 0 #inicializa likes
-
-    @property
-    def likes(self):
-        return self.__likes
-
-    def dar_like(self): #método para dar likes é um método. Pq ele é incremental
-        self.likes += 1
+        return self._likes
 
     def dar_like(self):  # método para dar likes é um método. Pq ele é incremental
-        self.__likes += 1
+        self._likes += 1
 
     @property
     def nome(self):
-        return self.__nome
+        return self._nome
 
-    @nome.setter
+    @nome.setter  # define que um private receba novo valor
     def nome(self, novo_nome):
-        self.__nome = novo_nome.title()
+        self._nome = novo_nome.title()  # padroniza tratamento
+
+
+class Filme(Programa): #a classe mãe vai entre parênteses
+    def __init__(self, nome, ano, duracao):
+        super().__init__(nome, ano)#chamando inicializar da classe mãe. Assim, o objeto recebe instância craida pela classe mãe
+        self.duracao = duracao  # não protegido
+
+class Serie(Programa):
+    def __init__(self, nome, ano, temporadas):
+        super().__init__(nome, ano)
+        self.temporadas = temporadas
 
 vingadores = Filme('vingadores - guerra infinita', 2018, 160)
 vingadores.dar_like()
