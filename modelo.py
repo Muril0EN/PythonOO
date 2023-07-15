@@ -1,6 +1,13 @@
 #Herança, Polimorfismo e mais
 #tarefa _ playlist de programas de TV
 #modelo é o nome do doc criado para representar conceitos classes que representam um domínio do sistema
+
+#Classes abstratas são usadas para reduzir Duck tiping
+#from abc import ABC #abstract base classes- servem como base e reduzem a necessidade ed criação de classe
+#from collections.abc import MutableSequence #pacote com diversas coleções
+
+#class Playlist(MutableSequence): #herança de coleções (precisa de ajustes que virão no erro)
+
 class Programa:
     def __init__(self, nome, ano):
         self._nome = nome.title()  # classes mãe devem receber apenas '1 _' p/ tornando privado
@@ -48,7 +55,7 @@ class Playlist: #usar uma 'built in function' como mãe pode aumentar a complexi
     #forma de reuso
         #composição ->
         #extensão ->
-    def __getitem__(self, item):#torna a classe iterável. Não faz herança, faz com que o comportamento seja o preciso
+    def __getitem__(self, item):#magic method, torna a classe iterável. Não faz herança, faz com que o comportamento seja o preciso
         return self._programas[item]#ou seja, posso usar métodos para iterar ('in' e 'for in')
 
     @property
