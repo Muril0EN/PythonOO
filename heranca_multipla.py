@@ -1,4 +1,7 @@
 class Funcionario:
+    def __init__(self, nome):
+        self.nome = nome
+
     def registra_horas(self, horas):
         print('Horas registradas.')
 
@@ -21,15 +24,18 @@ class Alura(Funcionario):
 
 #tarefa: fazer com que funcionários recebam herança de forma personalizada
 
+class Hipster: #classes mixing - usada para compatilhar comportamento simples sem ter que instaciar
+    def __str__(self):
+        return f'Hipster, {self.nome}'
 class Junior(Alura):
     pass
 
 class Pleno(Alura, Caelum): #gerando herança múltiplas, pontos separados por ',', esse comportamente g
     pass #esse comportamento não existe em outras linguagens
 #esse herança múltipla pode gerar conflito para execução de meétodos com nomes iguais, pegando o primeiro
-jose = Junior()
-jose.busca_perguntas_sem_resposta()
 
-luan = Pleno()
-luan.busca_perguntas_sem_resposta()
-luan.busca_cursos_do_mes()
+class Senior(Alura, Caelum, Hipster): #herança de um comportamento simples
+    pass
+
+luan = Senior("Luan")
+print(luan)
