@@ -22,23 +22,34 @@ class Programa:
     def nome(self, novo_nome):
         self._nome = novo_nome.title()  # padroniza tratamento
 
+    def __str__(self): #método especial que retorna dado como string
+        return f'({self._nome}) - ({self.ano}) - ({self._likes}) likes'
 
 class Filme(Programa): #a classe mãe vai entre parênteses
     def __init__(self, nome, ano, duracao):
         super().__init__(nome, ano)#chamando inicializar da classe mãe. Assim, o objeto recebe instância craida pela classe mãe
         self.duracao = duracao  # não protegido
 
+    def __str__(self):
+        return f'({self.nome}) - ({self.duracao}) - ({self._likes})'
 class Serie(Programa):
     def __init__(self, nome, ano, temporadas):
         super().__init__(nome, ano)
         self.temporadas = temporadas
 
-vingadores = Filme('vingadores - guerra infinita', 2018, 160)
+    def __str__(self):
+        return f'({self.nome}) - ({self.temporadas}) - ({self.likes})'
+
+vingadores = Filme('vingadores', 2018, 160)
 vingadores.dar_like()
 
 atlanta = Serie('atlanta', 2018, 2)
 atlanta.dar_like()
 atlanta.dar_like()
 
-print(f'Nome: {atlanta.nome} - Ano: {atlanta.ano} - Temporadas: {atlanta.temporadas} - Likes: {atlanta.likes}')
-print(f'Nome: {vingadores.nome} - Ano: {vingadores.ano} - Duraçao: {vingadores.duracao} - Likes: {vingadores.likes}')
+#Polimorfismo ->
+filmes_e_series = [vingadores, atlanta] #criar lista
+
+for programa in filmes_e_series: #a definição do método 'imprime' na superclasse exclui a necessidade de fazer
+    # 'if' pra descobrir "detalhes" de cada classe filho
+    print(programa) #se definido __str__ na classe o programa "acha" e imprime a string.
