@@ -40,16 +40,47 @@ class Serie(Programa):
     def __str__(self):
         return f'({self.nome}) - ({self.temporadas}) - ({self.likes})'
 
-vingadores = Filme('vingadores', 2018, 160)
-vingadores.dar_like()
+class Playlist: #usar uma 'built in function' como mãe pode aumentar a complexidade
+    def __init__(self, nome, programas):
+        self.nome = nome
+        self._programas = programas
+#Tipos de herança - interface x reuso (absorver propriedades)
+    #forma de reuso
+        #composição ->
+        #extensão ->
+    def __getitem__(self, item):#torna a classe iterável. Não faz herança, faz com que o comportamento seja o preciso
+        return self._programas[item]#ou seja, posso usar métodos para iterar ('in' e 'for in')
 
+    @property
+    def listagem(self):
+        return self._programas
+
+    def __len__(self): #magic method não precisam de @property
+        return len(self._programas)
+
+vingadores = Filme('vingadores', 2018, 160)
 atlanta = Serie('atlanta', 2018, 2)
+tmep = Filme('Todo mundo em pânico', 1999, 100)
+demolidor = Serie('Demolidor', 2016, 2)
+
+vingadores.dar_like()
+tmep.dar_like()
+tmep.dar_like()
+tmep.dar_like()
+tmep.dar_like()
+tmep.dar_like()
+demolidor.dar_like()
+demolidor.dar_like()
+atlanta.dar_like()
+atlanta.dar_like()
 atlanta.dar_like()
 atlanta.dar_like()
 
 #Polimorfismo ->
-filmes_e_series = [vingadores, atlanta] #criar lista
+filmes_e_series = [vingadores, atlanta, demolidor, tmep] #criar lista
+playlist_fim_de_semana = Playlist('Fim de semana', filmes_e_series) #criando o objeto
 
-for programa in filmes_e_series: #a definição do método 'imprime' na superclasse exclui a necessidade de fazer
-    # 'if' pra descobrir "detalhes" de cada classe filho
+print(f'Tamanho da playlist: {len(playlist_fim_de_semana)}')
+
+for programa in playlist_fim_de_semana: #precisa ter certeza que é iterável, para garantir encapsulamento foi declarado na classe
     print(programa) #se definido __str__ na classe o programa "acha" e imprime a string.
