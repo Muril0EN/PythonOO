@@ -4,7 +4,7 @@ import re #regular expressions -- RegEx
 
 #cep = 5 digitos + hífen (opcional) + 3 dígitos
                                                                               #opcional
-padrao = re.compile('[0123456789][0123456789][0123456789][0123456789][0123456789][-]?[0123456789][0123456789][0123456789]')
+padrao = re.compile('[0-9]{5}[-]{0,1}[0-9]{3}')#{}pode receber a-z
 busca = padrao.search(endereco) #match ou none
 if busca:
     cep=busca.group()
