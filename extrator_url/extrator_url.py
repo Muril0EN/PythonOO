@@ -34,8 +34,21 @@ class ExtratorURL:
         else:
             valor = self.get_url_parametros()[indice_valor: indice_e_comercial]
         return valor
+    def __len__(self): #tornar 'contável'
+        return len(self.url)
+
+    def __str__(self): #tornar 'imprimível'
+        return self.url + '\n' "Parâramento: " + self.get_url_parametros() + '\n' + "URL base: " + self.get_url_base()
+
+    def __eq__(self, other):#tornar 'comparável', ignorando o fato de estarem em endereços de memória diferente
+        return self.url == other.url #iguais (valor) mas não idênticos(endereços de memória)
 
 url = ('https://www.bytebank.com.br/cambio?quantidade=100&moedaOrigem=real&moedaDestino=dolar')
 extrator_url = ExtratorURL(url)
+
 valor_quantidade = extrator_url.get_valor_parametro("quantidade")
 print(valor_quantidade)
+
+#VER O ENDEREÇO DE MEMÓRIA
+#id(objeto)
+#x is True
